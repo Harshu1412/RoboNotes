@@ -5,7 +5,7 @@ export default function Topbar({ query, onSearch, onMenuClick, mobileNavOpen }) 
     <header className="topbar">
       <Link to="/" className="mobile-brand">✦ ROBONOTES</Link>
       <div className="crumb">
-        SCHOOL OF ROBOTICS <span>/</span> SEMESTER 01
+        SCHOOL OF ROBOTICS <span></span> 
       </div>
       <div className="top-actions">
         <label className="search">

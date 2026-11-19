@@ -12,7 +12,7 @@ export default function Overview({ resources, papers, onDelete }) {
       {/* ── Hero ── */}
       <section className="welcome">
         <div>
-          <p className="eyebrow">SEMESTER 01 · 2026</p>
+          <p className="eyebrow"></p>
           <h1>Your knowledge base,<br /><em>in one place.</em></h1>
           <p className="intro">
             Everything you need for your M.Tech journey in Robotics.<br />
@@ -35,10 +35,7 @@ export default function Overview({ resources, papers, onDelete }) {
         <div><strong>{papers.items.length}</strong><span>Past papers</span></div>
         <div className="stats-note">
           <span className="green-check">✓</span>
-          <p>
-            <strong>Live database</strong>
-            <small>Powered by Supabase</small>
-          </p>
+         
         </div>
       </section>
 

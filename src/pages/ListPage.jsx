@@ -12,7 +12,7 @@ export default function ListPage({ title, section, items, loading, onDelete, fil
       <div className="resource-list full-list">
         {loading && <p className="empty-note">Loading…</p>}
         {!loading && displayed.length === 0 && (
-          <p className="empty-note">Nothing here yet. Add entries from Admin access.</p>
+          <p className="empty-note">Nothing here yet.</p>
         )}
         {displayed.map(item => (
           <ResourceRow
