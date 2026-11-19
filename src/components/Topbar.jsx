@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
+
 export default function Topbar({ query, onSearch, onAdminClick }) {
   return (
     <header className="topbar">
-      <div className="mobile-brand">✦ ROBONOTES</div>
+      <Link to="/" className="mobile-brand">✦ ROBONOTES</Link>
       <div className="crumb">
         SCHOOL OF ROBOTICS <span>/</span> SEMESTER 01
       </div>
@@ -15,7 +17,6 @@ export default function Topbar({ query, onSearch, onAdminClick }) {
           />
         </label>
         <button className="icon-btn" title="Notifications">♧<b></b></button>
-        <div className="avatar">AK</div>
       </div>
     </header>
   )

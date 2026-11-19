@@ -14,10 +14,10 @@ export default function Sidebar({ onAdminClick }) {
 
   return (
     <aside className="sidebar">
-      <div className="brand">
+      <NavLink to="/" className="brand" aria-label="RoboNotes home">
         <span className="brand-mark">✦</span>
         <span>ROBO<span className="brand-accent">NOTES</span></span>
-      </div>
+      </NavLink>
 
       <p className="side-label">WORKSPACE</p>
       <nav>
