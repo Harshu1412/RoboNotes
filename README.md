@@ -17,15 +17,7 @@ Backed by **Supabase** (free tier — no credit card needed).
 
 ---
 
-## Step 1 — Create a free Supabase project
 
-1. Go to **https://supabase.com** and sign up (free).
-2. Click **New project** → give it a name (e.g. `robonotes`) → pick a region close to India → set a DB password (save it somewhere).
-3. Wait ~2 minutes for it to provision.
-
----
-
-## Step 2 — Run the SQL migration
 
 1. In your Supabase dashboard: **SQL Editor → New query**.
 2. Open `supabase_setup.sql` from this project, copy the whole file, paste it, click **Run**.
@@ -33,55 +25,14 @@ Backed by **Supabase** (free tier — no credit card needed).
 
 ---
 
-## Step 3 — Create Storage buckets
 
-1. In Supabase dashboard: **Storage → New bucket**.
-2. Create **two** buckets, one at a time:
-   - `resources` → tick **Public bucket** → Save
-   - `papers`    → tick **Public bucket** → Save
-
----
-
-## Step 4 — Get your API keys
-
-1. Supabase dashboard → **Settings → API**.
-2. Copy:
-   - **Project URL** (looks like `https://xxxx.supabase.co`)
-   - **anon / public** key (the long JWT string)
-
----
-
-## Step 5 — Configure the .env file
-
-```bash
-cp .env.example .env
-```
-
-Open `.env` and fill in:
-
-```
-VITE_SUPABASE_URL=https://your-project-id.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key-here
-VITE_ADMIN_PASSWORD=robotics2026
-```
-
-> Change `VITE_ADMIN_PASSWORD` to whatever password you want. This is  
-> the password used to unlock the admin panel AND to delete any item.
-
----
-
-## Step 6 — Install & run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open **http://localhost:5173** — you should see the app.
 
----
-
-## Step 7 — Deploy (optional, free)
 
 **Vercel:**
 ```bash
@@ -108,7 +59,7 @@ Add the three env vars (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_ADM
 
 ---
 
-## Project structure
+
 
 ```
 src/
