@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function Topbar({ query, onSearch, onAdminClick }) {
+export default function Topbar({ query, onSearch, onMenuClick, mobileNavOpen }) {
   return (
     <header className="topbar">
       <Link to="/" className="mobile-brand">✦ ROBONOTES</Link>
@@ -17,6 +17,16 @@ export default function Topbar({ query, onSearch, onAdminClick }) {
           />
         </label>
         <button className="icon-btn" title="Notifications">♧<b></b></button>
+          <button
+            className="mobile-menu-button"
+            type="button"
+            aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileNavOpen}
+            aria-controls="primary-sidebar"
+            onClick={onMenuClick}
+          >
+            {mobileNavOpen ? '×' : '☰'}
+          </button>
       </div>
     </header>
   )

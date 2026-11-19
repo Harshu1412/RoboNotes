@@ -9,12 +9,12 @@ const NAV_ITEMS = [
   { path: '/videos',     label: 'Video library',  icon: '▶' },
 ]
 
-export default function Sidebar({ onAdminClick }) {
+export default function Sidebar({ onAdminClick, onClose, isMobileOpen }) {
   const { isAdmin, logout } = useAdmin()
 
   return (
-    <aside className="sidebar">
-      <NavLink to="/" className="brand" aria-label="RoboNotes home">
+    <aside id="primary-sidebar" className={`sidebar${isMobileOpen ? ' sidebar-open' : ''}`}>
+      <NavLink to="/" className="brand" aria-label="RoboNotes home" onClick={onClose}>
         <span className="brand-mark">✦</span>
         <span>ROBO<span className="brand-accent">NOTES</span></span>
       </NavLink>
@@ -26,6 +26,7 @@ export default function Sidebar({ onAdminClick }) {
             key={item.path}
             to={item.path}
             end={item.path === '/'}
+            onClick={onClose}
             className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
           >
             <span>{item.icon}</span>
@@ -39,7 +40,11 @@ export default function Sidebar({ onAdminClick }) {
       </p>
       <div className="subject-nav">
         {SUBJECTS.map(subject => (
-          <NavLink key={subject.id} to={`/resources?subject=${encodeURIComponent(subject.name)}`}>
+          <NavLink
+            key={subject.id}
+            to={`/resources?subject=${encodeURIComponent(subject.name)}`}
+            onClick={onClose}
+          >
             <i className={`dot ${subject.color}`}></i>
             {subject.name}
           </NavLink>
@@ -57,7 +62,7 @@ export default function Sidebar({ onAdminClick }) {
         {isAdmin ? (
           <>
             <button className="admin-link" onClick={onAdminClick}>⚙ Content Manager</button>
-            <button className="admin-link" onClick={logout}>↪ Sign out admin</button>
+            <button className="admin-link" onClick={() => { logout(); onClose() }}>↪ Sign out admin</button>
           </>
         ) : (
           <button className="admin-link" onClick={onAdminClick}>⚙ Admin access</button>

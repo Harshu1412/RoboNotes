@@ -1,0 +1,138 @@
+.subject-nav a {
+  border: 0;
+  background: transparent;
+  color: #76746c;
+  text-align: left;
+  width: 100%;
+  padding: 8px 13px;
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  font-size: 12px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.subject-nav a:hover {
+  background: #f5f4ef;
+  color: var(--ink);
+}
+
+.brand:focus-visible,
+.mobile-brand:focus-visible,
+.nav-item:focus-visible,
+.subject-nav a:focus-visible,
+.mobile-menu-button:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.sidebar-backdrop,
+.mobile-menu-button {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    position: fixed;
+    z-index: 30;
+    inset: 0 auto 0 0;
+    display: flex;
+    width: min(290px, calc(100vw - 56px));
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(-105%);
+    visibility: hidden;
+    transition: transform 0.24s ease, visibility 0.24s ease;
+    box-shadow: 12px 0 35px #1112;
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .sidebar .nav-item,
+  .sidebar .subject-nav a {
+    min-height: 44px;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    z-index: 29;
+    inset: 0;
+    display: block;
+    border: 0;
+    padding: 0;
+    background: #20201e80;
+  }
+
+  .topbar {
+    height: 68px;
+    gap: 10px;
+    padding: 0 16px;
+  }
+
+  .crumb {
+    display: none;
+  }
+
+  .mobile-brand {
+    display: block;
+    flex-shrink: 0;
+    font-size: clamp(12px, 3.8vw, 14px);
+    white-space: nowrap;
+  }
+
+  .top-actions {
+    flex: 1;
+    min-width: 0;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .search {
+    width: clamp(76px, 25vw, 150px);
+    min-width: 0;
+  }
+
+  .search input {
+    min-width: 0;
+  }
+
+  .icon-btn {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 34px;
+    height: 40px;
+  }
+
+  .mobile-menu-button {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 22px;
+  }
+
+  .mobile-menu-button[aria-expanded="true"] {
+    position: fixed;
+    z-index: 31;
+    top: 14px;
+    right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar {
+    transition: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import { useResources } from './hooks/useResources'
@@ -15,9 +15,38 @@ import ResourcesPage from './pages/ResourcesPage'
 import ListPage      from './pages/ListPage'
 
 import './App.css'
+import './responsive.css'
 
 export default function App() {
   const [showAdminModal, setShowAdminModal] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+
+  useEffect(() => {
+    if (!mobileNavOpen) return
+
+    const previousFocus = document.activeElement
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') setMobileNavOpen(false)
+    }
+
+    document.querySelector('#primary-sidebar .nav-item')?.focus()
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
+      if (previousFocus instanceof HTMLElement) previousFocus.focus()
+    }
+  }, [mobileNavOpen])
+
+  useEffect(() => {
+    const closeDrawerOnDesktop = () => {
+      if (window.innerWidth > 767) setMobileNavOpen(false)
+    }
+
+    window.addEventListener('resize', closeDrawerOnDesktop)
+    return () => window.removeEventListener('resize', closeDrawerOnDesktop)
+  }, [])
 
   // ── Data hooks — one per Supabase table ───────────────────────────────────
   const resources = useResources('resources')
@@ -39,15 +68,33 @@ export default function App() {
     return hook.addItem(payload)
   }
 
+  const openAdminModal = () => {
+    setMobileNavOpen(false)
+    setShowAdminModal(true)
+  }
+
   return (
     <div className="app-shell">
-      <Sidebar onAdminClick={() => setShowAdminModal(true)} />
+      <Sidebar
+        isMobileOpen={mobileNavOpen}
+        onClose={() => setMobileNavOpen(false)}
+        onAdminClick={openAdminModal}
+      />
+      {mobileNavOpen && (
+        <button
+          className="sidebar-backdrop"
+          type="button"
+          aria-label="Close navigation menu"
+          onClick={() => setMobileNavOpen(false)}
+        />
+      )}
 
       <main className="main-content">
         <Topbar
           query={query}
           onSearch={setQuery}
-          onAdminClick={() => setShowAdminModal(true)}
+          onMenuClick={() => setMobileNavOpen(open => !open)}
+          mobileNavOpen={mobileNavOpen}
         />
 
         {/* Search results overlay */}
